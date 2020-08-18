@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+//error reporting
+error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
 use App\Collection;
+use Exception;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -14,18 +19,8 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $data = Collection::orderBy('id', 'desc')->paginate(5);
+        $data = Collection::orderBy('id', 'desc')->get();
         return response()->json($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -36,20 +31,19 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        // use /validate method provided by Illuminate\Http\Request object to validate post data
-        // if validation fails JSON response will be sent for AJAX requests
-        $this->validate($request, [
-                'name' => 'required|string|max:191',
-                'email' => 'required|string|email|unique:users|max:191',
-                'password' => 'required|string|min:6',
-            ]
-        );
-
-        return Collection::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Collection::make($request['password']),
-        ]);
+        try {
+            $collection = new Collection([
+                'name' => $request['name'],
+                'description' => $request['description'],
+                'users_id' => "1",
+                'image' => "image/image"
+            ]);
+            $collection->save();
+     
+            return response()->json('The collection successfully added', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
 
     /**

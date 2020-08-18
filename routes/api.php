@@ -14,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResources(['collection' => 'CollectionController']); 
+Route::get('collection' , 'CollectionController@index'); 
+Route::post('collection/store' , 'CollectionController@store'); 
+Route::get('collection/edit/{id}' , 'CollectionController@edit'); 
+Route::put('collection/update/{id}' , 'CollectionController@update'); 
+Route::delete('collection/delete/{id}' , 'CollectionController@destroy'); 
