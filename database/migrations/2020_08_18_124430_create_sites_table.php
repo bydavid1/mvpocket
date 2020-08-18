@@ -16,6 +16,12 @@ class CreateSitesTable extends Migration
         Schema::create('sites', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('collection_id');
+            $table->foreign('collection_id')->references('id')->on('collections')->onDelete('cascade');
+            $table->string('url');
+            $table->string('image');
+            $table->string('title');
+            $table->string('description');
         });
     }
 

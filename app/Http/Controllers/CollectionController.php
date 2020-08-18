@@ -14,7 +14,8 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        //
+        $data = Collection::orderBy('id', 'desc')->paginate(5);
+        return response()->json($data);
     }
 
     /**
@@ -35,16 +36,29 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // use /validate method provided by Illuminate\Http\Request object to validate post data
+        // if validation fails JSON response will be sent for AJAX requests
+        $this->validate($request, [
+                'name' => 'required|string|max:191',
+                'email' => 'required|string|email|unique:users|max:191',
+                'password' => 'required|string|min:6',
+            ]
+        );
+
+        return Collection::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Collection::make($request['password']),
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Collection  $collection
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Collection $collection)
+    public function show($id)
     {
         //
     }
@@ -52,10 +66,10 @@ class CollectionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Collection  $collection
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Collection $collection)
+    public function edit($id)
     {
         //
     }
@@ -64,22 +78,37 @@ class CollectionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Collection  $collection
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Collection $collection)
+    public function update(Request $request, $id)
     {
-        //
+        $user = Collection::findOrFail($id);
+
+        $this->validate($request, [
+                'name' => 'required|string|max:191',
+                'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
+                'password' => 'sometimes|min:6',
+            ]
+        );
+
+        $user->update($request->all());
+
+        return $user;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Collection  $collection
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Collection $collection)
+    public function destroy($id)
     {
-        //
+        $user = Collection::findOrFail($id);
+
+        $user->delete();
+
+        return $user;
     }
 }
