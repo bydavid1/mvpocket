@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import Collection from "./pages/Collections";
 import AddCollection from "./pages/AddCollection";
 import SitesCollection from "./pages/SitesCollection";
+import AddSite from "./pages/AddSite";
 
 const router = new VueRouter({ 
   mode: "history",// Then we register route for User management module.
@@ -21,9 +22,14 @@ const router = new VueRouter({
         component: AddCollection
     },
     {
-        path:"/collections/sites/:id",
+        path:"/collections/:id/sites",
         name: "sitescollection",
         component: SitesCollection
+    },
+    {
+        path:"/collections/:id/site/add",
+        name: "addsite",
+        component: AddSite
     },
   ],
 }); 

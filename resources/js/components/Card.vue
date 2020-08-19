@@ -5,7 +5,7 @@
             <p class="card-text">
                 {{ description }}
             </p> 
-            <router-link :to="'/collections/sites/' + id" class="card-link">Ver coleccion</router-link>
+            <router-link :to="'/collections/'+ id +'/sites'" class="card-link">Ver coleccion</router-link>
             <router-link to="" class="card-link text-danger">Eliminar coleccion</router-link>
         </div>
     </div>

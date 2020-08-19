@@ -19,3 +19,7 @@ Route::post('collection/store' , 'CollectionController@store');
 Route::get('collection/edit/{id}' , 'CollectionController@edit'); 
 Route::put('collection/update/{id}' , 'CollectionController@update'); 
 Route::delete('collection/delete/{id}' , 'CollectionController@destroy'); 
+
+Route::get('collection/{id}/sites' , 'SiteController@index'); 
+Route::get('fetchOpenGraph' , 'SiteController@getOpenGraph'); 
+Route::post('collection/{id}/site/store' , 'SiteController@store'); 

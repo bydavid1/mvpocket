@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+//error reporting
+error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
 use App\Site;
+use Exception;
 use Illuminate\Http\Request;
+use shweshi\OpenGraph\OpenGraph;
+use Illuminate\Support\Str;
 
 class SiteController extends Controller
 {
@@ -12,19 +19,27 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $data = Site::orderBy('id', 'desc')->where('collection_id', $id)->get();
+        return response()->json($data);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show tog:data
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getOpenGraph(Request $request)
     {
-        //
+        try {
+            $op = new OpenGraph();
+            $data = $op->fetch($request->url);
+            return response()->json(["data" => $data], 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
+
     }
 
     /**
@@ -33,9 +48,21 @@ class SiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+        try {
+            $site = new Site();
+            $site->collection_id = $id;
+            $site->url = $request['url'];
+            $site->image = $request['image'];
+            $site->title = $request['title'];
+            $site->description = Str::limit($request['description'], 200, "...");
+            $site->save();
+
+            return response()->json('The site successfully added', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
 
     /**

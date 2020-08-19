@@ -20,7 +20,7 @@
             <!-- /.content-header -->
             <!-- Main content -->
             <div class="content">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
                     <div class="collapse navbar-collapse">
                         <div class="navbar-nav">
                             <router-link to="/collections" class="nav-item nav-link">Ver todas tus colecciones</router-link>

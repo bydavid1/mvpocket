@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="margin-top: 30px">
+    <div class="container">
         <div class="card">
             <div class="card-body">
                 <div class="alert alert-danger alert-dismissible" role="alert" v-show="hasError">
@@ -43,7 +43,6 @@ export default {
                 this.axios
                 .post('http://localhost:8000/api/collection/store', this.collection)
                 .then(response => {
-                    console.log(response.data)
                     this.$router.push({name: 'collections'})
                 })
                 .catch(error => { 
