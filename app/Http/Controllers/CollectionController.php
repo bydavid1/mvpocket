@@ -77,18 +77,16 @@ class CollectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = Collection::findOrFail($id);
-
-        $this->validate($request, [
-                'name' => 'required|string|max:191',
-                'email' => 'required|string|email|max:191|unique:users,email,' . $user->id,
-                'password' => 'sometimes|min:6',
-            ]
-        );
-
-        $user->update($request->all());
-
-        return $user;
+        try {
+            $collection = new Collection();
+            $collection->name = $request['name'];
+            $collection->description = $request['description'];
+            $collection->image = $request['image'];
+            $collection->save();
+            return response()->json('The collection has been updated successfully', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -99,10 +97,13 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {
-        $user = Collection::findOrFail($id);
-
-        $user->delete();
-
-        return $user;
+        try {
+            $collection = Collection::findOrFail($id);
+            $collection->delete();
+            return response()->json('The collection has been removed successfully', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
+
 }

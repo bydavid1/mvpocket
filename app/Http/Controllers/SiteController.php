@@ -94,19 +94,34 @@ class SiteController extends Controller
      * @param  \App\Site  $site
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Site $site)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $site = new Site();
+            $site->title = $request['title'];
+            $site->description = $request['description'];
+            $site->image = $request['image'];
+            $site->save();
+            return response()->json('The site has been updated successfully', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Site  $site
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Site $site)
+    public function destroy($id)
     {
-        //
+        try {
+            $site = Site::findOrFail($id);
+            $site->delete();
+            return response()->json('The site has been removed successfully', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
 }
