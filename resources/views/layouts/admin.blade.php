@@ -62,7 +62,7 @@
                         <img src="https://www.waspcom.com/wp-content/uploads/2014/10/user-placeholder-circle-1-300x300.png" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="#" class="d-block">User</a>
                     </div>
                 </div>
 
@@ -72,38 +72,31 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                  with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fa fa-dashboard"></i>
-                                <p>
-                                    Starter Pages
-                                    <i class="right fa fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link active">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Active Page</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="fa fa-circle-o nav-icon"></i>
-                                        <p>Inactive Page</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa fa-th"></i>
-                                <p>
-                                    Simple Link
-                                    <span class="right badge badge-danger">New</span>
-                                </p>
-                            </a>
-                        </li>
+                 <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fa fa-home"></i>
+                        <p>
+                            Inicio
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-heart"></i>
+                        <p>
+                            Favoritos
+                            <span class="right badge badge-danger">Soon</span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-user"></i>
+                        <p>
+                            Cuenta
+                        </p>
+                    </a>
+                </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -111,9 +104,7 @@
             <!-- /.sidebar -->
         </aside>
 
-        <div id="app">
-            
-        </div>
+        @yield('content')
 
         <!-- Main Footer -->
         <footer class="main-footer">

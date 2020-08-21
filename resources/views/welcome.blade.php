@@ -13,7 +13,7 @@
         <style>
             html, body {
                 background-color: #fff;
-                color: #636b6f;
+                color: #fff;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -28,6 +28,8 @@
                 align-items: center;
                 display: flex;
                 justify-content: center;
+                background-image: url('{{ URL::asset("images/3449401.jpg") }}');
+                background-repeat: no-repeat;
             }
 
             .position-ref {
@@ -48,8 +50,12 @@
                 font-size: 84px;
             }
 
+            .subtitle {
+                font-size: 30px;
+            }
+
             .links > a {
-                color: #636b6f;
+                color: #fff;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -61,6 +67,40 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .m-b-sm {
+                margin-bottom: 20px;
+            }
+
+            .m-b-lg {
+                margin-bottom: 40px;
+            }
+
+            .btn-sign{
+                text-decoration: none;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 24px;
+                -webkit-box-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                align-items: center;
+                align-content: center;
+                padding: 10px 20px;
+                max-width: 400px;
+                background-color: #fff;
+                color: #000;
+                border-radius: 4px;
+                height: 60px;
+                margin-bottom: 24px;
+                height: 48px;
+                position: relative;
+                border: none;
+            }
+
+            .tech-logo{
+                max-width: 15%;
+            }
         </style>
     </head>
     <body>
@@ -68,7 +108,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('home') }}">Home</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -80,20 +120,17 @@
             @endif
 
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="title m-b-sm">
+                    My version pocket
+                </div>
+                <div class="subtitle m-b-md">
+                    Don't forget your sites
+                </div>
+                <div class="m-b-lg">
+                    <a class="btn-sign" href="{{ route('login') }}">Go to login</a>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <img class="tech-logo" src="{{ URL::asset("images/tech.png") }}">
             </div>
         </div>
     </body>
