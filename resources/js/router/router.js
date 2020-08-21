@@ -3,14 +3,32 @@ import VueRouter from "vue-router"; // We import /Vue router from /vue-router fi
 
 Vue.use(VueRouter) 
 
-import Collection from "./pages/Collections";
-import AddCollection from "./pages/AddCollection";
-import SitesCollection from "./pages/SitesCollection";
-import AddSite from "./pages/AddSite";
+import Collection from "../pages/Collections";
+import AddCollection from "../pages/AddCollection";
+import SitesCollection from "../pages/SitesCollection";
+import AddSite from "../pages/AddSite";
+import Welcome from "../pages/Welcome";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 
 const router = new VueRouter({ 
   mode: "history",// Then we register route for User management module.
   routes: [
+    {
+        path:"/",
+        name: "welcome",
+        component: Welcome
+    },
+    {
+        path:"/login",
+        name: "login",
+        component: Login
+    },
+    {
+        path:"/register",
+        name: "register",
+        component: Register
+    },
     {
         path:"/collections",
         name: "collections",

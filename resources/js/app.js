@@ -9,8 +9,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import App from './pages/App.vue';
-import routes from './router'
+import App from './App.vue';
+import routes from './router/router'
 
 
 const app = new Vue({
