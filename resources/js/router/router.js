@@ -1,18 +1,18 @@
 import Vue from "vue";
 import VueRouter from "vue-router"; // We import /Vue router from /vue-router first.
 
-Vue.use(VueRouter) 
+Vue.use(VueRouter)
 
 import Collection from "../pages/Collections";
 import AddCollection from "../pages/AddCollection";
 import SitesCollection from "../pages/SitesCollection";
 import AddSite from "../pages/AddSite";
 import Welcome from "../pages/Welcome";
+import Home from "../pages/Home";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 
-const router = new VueRouter({ 
-  mode: "history",// Then we register route for User management module.
+const router = new VueRouter({
   routes: [
     {
         path:"/",
@@ -22,34 +22,39 @@ const router = new VueRouter({
     {
         path:"/login",
         name: "login",
-        component: Login
+        component: Login,
     },
     {
         path:"/register",
         name: "register",
-        component: Register
+        component: Register,
     },
     {
         path:"/collections",
         name: "collections",
-        component: Collection
+        component: Collection,
     },
+      {
+          path:"/home",
+          name: "home",
+          component: Home,
+      },
     {
         path:"/collections/add",
         name: "addcollection",
-        component: AddCollection
+        component: AddCollection,
     },
     {
         path:"/collections/:id/sites",
         name: "sitescollection",
-        component: SitesCollection
+        component: SitesCollection,
     },
     {
         path:"/collections/:id/site/add",
         name: "addsite",
-        component: AddSite
+        component: AddSite,
     },
   ],
-}); 
+});
 
 export default router // Next we create local registration of /router property, so we can import it within /app.js (our root /Vue instance)

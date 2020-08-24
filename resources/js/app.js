@@ -1,9 +1,8 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import VueAxios from 'vue-axios';
+import VueAuth from '@websanova/vue-auth';
 import axios from 'axios';
 
-Vue.use(VueRouter)
 Vue.use(VueAxios, axios);
 require('./bootstrap');
 
@@ -12,9 +11,10 @@ window.Vue = require('vue');
 import App from './App.vue';
 import routes from './router/router'
 
+Vue.router = routes
 
 const app = new Vue({
-    router: routes,
+    router: Vue.router,
     el: '#app',
     render: h => h(App)
 });

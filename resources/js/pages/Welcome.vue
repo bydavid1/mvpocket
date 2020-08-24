@@ -15,6 +15,7 @@
                 </div>
                 <div class="m-b-lg">
                     <router-link to="/login" class="btn-sign">Goto login</router-link>
+                    <router-link to="/collections" class="btn-sign">Goto ss</router-link>
                 </div>
                 <img class="tech-logo" src="images/tech.png">
             </div>

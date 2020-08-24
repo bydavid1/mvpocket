@@ -1,6 +1,7 @@
 <template>
-        <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" style="min-height: 103px;">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="container" style="min-height: 103px;">
+        <Navigation></Navigation>
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
@@ -27,9 +28,18 @@
                     </div>
                 </div>
             </nav>
-            <router-view></router-view>
         </div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 </template>
+
+<script>
+import Navigation from "../components/Navbar"
+    export default {
+        name : "Home",
+        components : {
+            Navigation
+        }
+    }
+</script>

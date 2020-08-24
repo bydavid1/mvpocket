@@ -1,10 +1,11 @@
 <template>
-    <div class="this-container">
-        <div class="login-box">
-            <div class="alert alert-danger" v-if="error">
-                <p>There was an error, unable to sign in with those credentials.</p>
-            </div>
-            <div class="login-box-body">
+    <div class="container mt-5">
+        <div class="card card-success">
+            <h5 class="card-header">Registro</h5>
+            <div class="card-body">
+                <div class="alert alert-danger" v-if="error">
+                    <p>There was an error, unable to sign in with those credentials.</p>
+                </div>
                 <form autocomplete="off" @submit.prevent="login" method="post">
                     <div class="form-group">
                         <label for="email">E-mail</label>
@@ -26,11 +27,3 @@ export default {
     name: "Login",
 }
 </script>
-
-<style scoped>
-    .this-container{
-        background: #d2d6de;
-        height: 100vh;
-        margin-top: 0;
-    }
-</style>

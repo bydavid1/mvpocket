@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Auth
+
+Route::post('auth/register', 'AuthController@register');
+
 Route::get('collection' , 'CollectionController@index');
 Route::post('collection/store' , 'CollectionController@store');
 Route::get('collection/edit/{id}' , 'CollectionController@edit');
