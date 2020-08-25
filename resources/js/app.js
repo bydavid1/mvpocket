@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueAxios from 'vue-axios';
-import VueAuth from '@websanova/vue-auth';
 import axios from 'axios';
 
 Vue.use(VueAxios, axios);

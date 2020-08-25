@@ -13,7 +13,10 @@
                         <label>Ingresa la url</label>
                         <input type="text" class="form-control" placeholder="Type url" v-model="url">
                     </div>
-                    <button type="submit" class=" btn btn-primary">Inspeccionar sitio</button>
+                    <button class="btn btn-primary" type="submit">
+                        <span v-if="load" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Inspeccionar sitio
+                    </button>
                 </form>
             </div>
         </div>
@@ -21,7 +24,7 @@
             <h5>Preview</h5>
             <CardImage :title="site.title" :description="site.description" :url="site.url" 
                 :image="site.image"></CardImage>
-                <button class="btn btn-success" v-on:click="store">Guardar</button>
+                <button class="btn btn-success my-3" v-on:click="store">Guardar</button>
         </div>
     </div>
 </template>
@@ -42,26 +45,29 @@ export default {
                 url: "",
                 errorresponse: "",
                 hasError: false,
+                load: false
             }
         },
         methods : {
             add () {
+                this.load = true
                 this.axios
                 .get('http://localhost:8000/api/fetchOpenGraph?url=' + this.url)
                 .then(response => {
                     let data = response.data;
-
                     this.site.title = data.data.title;
                     this.site.description = data.data.description
                     this.site.image = data.data.image
                     this.site.url = this.url
                     this.site.showCard = true
                     this.hasError = false
+                    this.load = false
                 })
                 .catch(error => { 
                     this.hasError = true 
                     this.errorresponse = error
                     this.site.showCard = false
+                    this.load = false
                 })
             },
             store () {

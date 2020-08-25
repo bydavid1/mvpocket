@@ -30,29 +30,31 @@ const router = new VueRouter({
         component: Register,
     },
     {
-        path:"/collections",
-        name: "collections",
-        component: Collection,
-    },
-      {
-          path:"/home",
-          name: "home",
-          component: Home,
-      },
-    {
-        path:"/collections/add",
-        name: "addcollection",
-        component: AddCollection,
-    },
-    {
-        path:"/collections/:id/sites",
-        name: "sitescollection",
-        component: SitesCollection,
-    },
-    {
-        path:"/collections/:id/site/add",
-        name: "addsite",
-        component: AddSite,
+        path:"/home",
+        name: "home",
+        component: Home,
+        children: [
+            {
+                path:"/collections",
+                name: "collections",
+                component: Collection,
+            },
+            {
+                path:"/collections/add",
+                name: "addcollection",
+                component: AddCollection,
+            },
+            {
+                path:"/collections/:id/sites",
+                name: "sitescollection",
+                component: SitesCollection,
+            },
+            {
+                path:"/collections/:id/site/add",
+                name: "addsite",
+                component: AddSite,
+            },
+        ]
     },
   ],
 });

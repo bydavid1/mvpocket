@@ -8,7 +8,7 @@
             <router-link to="/collections/add" class="btn btn-success mb-3">Agregar nueva coleccion</router-link>
             <div class="row">
                 <div class="col-md-6" v-for="collection in collections" :key="collection.id">
-                    <Card :title="collection.name" :description="collection.description" :id="collection.id"/>
+                    <Card :title="collection.name" :description="collection.description" :id="collection.id" class=" mb-4"/>
                 </div>
             </div>
         </div>
