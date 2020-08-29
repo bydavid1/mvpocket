@@ -1,11 +1,5 @@
 <template>
     <div class="container mt-5">
-        <div class="alert alert-danger" v-if="error && !success">
-            <p>There was an error, unable to complete registration.</p>
-        </div>
-        <div class="alert alert-success" v-if="success">
-            <p>Registration completed. You can now <router-link :to="{name:'login'}">sign in.</router-link></p>
-        </div>
         <div class="card card-success">
             <h5 class="card-header">Registro</h5>
             <div class="card-body">
@@ -37,32 +31,22 @@ export default {
     name: "Register",
      data(){
             return {
-                name: '',
-                email: '',
-                password: '',
-                error: false,
-                errors: {},
-                success: false
+                name : "",
+                email : "",
+                password : "",
             };
         },
     methods: {
         register(){
-            var app = this
-            this.$auth.register({
-                data: {
-                    name: app.name,
-                    email: app.email,
-                    password: app.password
-                },
-                success: function () {
-                    app.success = true
-                },
-                error: function (resp) {
-                    app.error = true;
-                    app.errors = resp.response.data.errors;
-                },
-                redirect: null
-            });
+            let data = {
+                name : this.name,
+                email : this.email,
+                password : this.password
+            }
+
+            this.$store.dispatch('register', data)
+            .then(() => this.$route.push('/'))
+            .catch(err => console.log(err))
         }
     }
 }
