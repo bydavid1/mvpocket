@@ -2,9 +2,13 @@
     <div class="c-container">
         <div class="flex-center position-ref full-height" style="background-image: url('images/3449401.jpg');">
             <div class="top-right links">
-                <router-link to="/home">Home</router-link>
-                <router-link to="/login">Login</router-link>
-                <router-link to="/register">Register</router-link>
+                <div v-if="isAuth">
+                    <router-link to="/home">Home</router-link>
+                </div>
+                <div v-else>
+                    <router-link to="/login">Login</router-link>
+                    <router-link to="/register">Register</router-link>
+                </div>
             </div>
             <div class="content">
                 <div class="title m-b-sm">
@@ -15,7 +19,6 @@
                 </div>
                 <div class="m-b-lg">
                     <router-link to="/login" class="btn-sign">Goto login</router-link>
-                    <router-link to="/collections" class="btn-sign">Goto ss</router-link>
                 </div>
                 <img class="tech-logo" src="images/tech.png">
             </div>
@@ -24,8 +27,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
     name: "Welcome",
+    computed : {
+        ...mapGetters([
+            'isAuth'
+        ])
+    }
 }
 </script>
 
@@ -72,7 +81,7 @@ export default {
         font-size: 30px;
     }
 
-    .links > a {
+    .links > div > a {
         color: #fff;
         padding: 0 25px;
         font-size: 13px;

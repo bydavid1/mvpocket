@@ -35,6 +35,7 @@ class AuthController extends Controller
         $user->save();
         return response()->json(['status' => 'success'], 200);
     }
+    
     /**
      * Login user and return a token
      */
@@ -46,6 +47,7 @@ class AuthController extends Controller
         }
         return response()->json(['error' => 'login_error'], 401);
     }
+
     /**
      * Logout User
      */

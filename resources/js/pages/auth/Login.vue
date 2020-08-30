@@ -3,9 +3,6 @@
         <div class="card card-success">
             <h5 class="card-header">Registro</h5>
             <div class="card-body">
-                <div class="alert alert-danger" v-if="error">
-                    <p>There was an error, unable to sign in with those credentials.</p>
-                </div>
                 <form autocomplete="off" @submit.prevent="login" method="post">
                     <div class="form-group">
                         <label for="email">E-mail</label>
@@ -15,7 +12,10 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" v-model="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <button type="submit" class="btn btn-primary">
+                        <span v-if="loader" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Iniciar sesion...
+                    </button>
                 </form>
             </div>
         </div>
@@ -28,16 +28,19 @@ export default {
     data () {
         return {
             email : "",
-            password : ""
+            password : "",
+            loader : false
         }
     },
     methods : {
         login : function () {
+            this.loader = true
             let email = this.email
             let password = this.password
             this.$store.dispatch('login', {email, password})
             .then(() => this.$router.push('/'))
             .catch(err => console.log(err))
+            this.loader = false
         }
     }
 }

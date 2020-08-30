@@ -37,8 +37,9 @@ const store = new Vuex.Store({
         login ({commit}, user) {
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url : 'api', data : user, method : 'POST'})
+                axios.post('http://127.0.0.1:8000/api/auth/login', user)
                 .then(response => {
+                    console.log(response)
                     const token = response.data.token
                     const user = response.data.user
                     localStorage.setItem('token', token)
@@ -47,6 +48,7 @@ const store = new Vuex.Store({
                     resolve('resp')
                 })
                 .catch(err => {
+                    console.log(err)
                     commit('auth_error')
                     localStorage.removeItem('token')
                     reject('err')
@@ -56,9 +58,10 @@ const store = new Vuex.Store({
         register ({commit}, user){
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url : 'api', data : user, method : 'POST'})
+                axios({url : 'http://127.0.0.1:8000/api/auth/register', data : user, method : 'POST'})
                 .then(response => {
-                    const token = response.data.token
+                    console.log(response)
+                    const token = response.headers.authorization
                     const user = response.data.user
                     localStorage.setItem('token', token)
                     axios.defaults.headers.common['Authorization'] = token
@@ -66,6 +69,7 @@ const store = new Vuex.Store({
                     resolve('resp')
                 })
                 .catch(err => {
+                    console.log('store register:' + err)
                     commit('auth_error')
                     localStorage.removeItem('token')
                     reject('err')
@@ -82,8 +86,9 @@ const store = new Vuex.Store({
         }
     },
     getters : {
-        isAuth : state => !!state.token ,
-        auth_status : state => state.status
+        isAuth : state => state.token,
+        auth_status : state => state.status,
+        getUser : state => state.user
     }
 
 })

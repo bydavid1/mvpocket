@@ -18,8 +18,8 @@
                         <li class="nav-item">
                             <router-link to="/collections" class="nav-link">Favoritos</router-link>
                         </li>
-                        <li>
-                            <a @click="logout" class="nav-link"></a>
+                        <li class="nav-item">
+                            <a @click="logout()" class="nav-link">Salir</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -70,16 +70,11 @@
 <script>
     export default {
         name : "Home",
-        computed : {
-            isAuth : function () {
-                return this.$store.getters.isAuth
-            }, 
-            methods : {
+        methods : {
                 logout () {
                     this.$store.dispatch('logout')
-                    .then(() =>  this.$router.push('login') )
+                    .then(() =>  this.$router.push('/') )
                 }
             }
         }
-    }
 </script>
