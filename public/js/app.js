@@ -2057,7 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       console.log("collection: " + this.collection);
-      axios.post('http://localhost:8000/api/auth/collection/store', this.collection).then(function (response) {
+      axios.post('/api/auth/collection/store', this.collection).then(function (response) {
         _this.$router.push({
           name: 'collections'
         });
@@ -2135,7 +2135,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.load = true;
-      axios.get('http://localhost:8000/api/auth/fetchOpenGraph?url=' + this.url).then(function (response) {
+      axios.get('/api/auth/fetchOpenGraph?url=' + this.url).then(function (response) {
         var data = response.data;
         _this.site.title = data.data.title;
         _this.site.description = data.data.description;
@@ -2154,7 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this2 = this;
 
-      axios.post('http://localhost:8000/api/auth/collection/' + this.$route.params.id + '/site/store', this.site).then(function (response) {
+      axios.post('/api/auth/collection/' + this.$route.params.id + '/site/store', this.site).then(function (response) {
         _this2.$router.push({
           name: 'sitescollection',
           params: _this2.$route.params.id
@@ -2211,7 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('http://127.0.0.1:8000/api/auth/collection').then(function (response) {
+    axios.get('/api/auth/collection').then(function (response) {
       _this.collections = response.data;
     })["catch"](function (error) {
       return console.log(error.response.data);
@@ -2321,7 +2321,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    axios.post('http://127.0.0.1:8000/api/auth/me').then(function (response) {
+    axios.post('/api/auth/me').then(function (response) {
       _this2.username = response.data.name;
     });
   }
@@ -2368,7 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get('http://127.0.0.1:8000/api/auth/collection/id/sites'.replace('id', this.$route.params.id)).then(function (response) {
+    axios.get('/api/auth/collection/id/sites'.replace('id', this.$route.params.id)).then(function (response) {
       _this.sites = response.data;
     });
   },
@@ -57521,7 +57521,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       var commit = _ref.commit;
       return new Promise(function (resolve, reject) {
         commit('auth_request');
-        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('http://127.0.0.1:8000/api/auth/login', user).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/auth/login', user).then(function (response) {
           var token = response.data.access_token;
           localStorage.setItem('token', token);
           axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['Authorization'] = "Bearer" + token;
@@ -57540,7 +57540,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       return new Promise(function (resolve, reject) {
         commit('auth_request');
         axios__WEBPACK_IMPORTED_MODULE_3___default()({
-          url: 'http://127.0.0.1:8000/api/auth/register',
+          url: '/api/auth/register',
           data: user,
           method: 'POST'
         }).then(function (response) {

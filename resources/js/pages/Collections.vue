@@ -26,7 +26,7 @@ export default {
     },
     created() {
         axios
-        .get('http://127.0.0.1:8000/api/auth/collection')
+        .get('/api/auth/collection')
         .then(response => {
             this.collections = response.data;
         })

@@ -34,7 +34,7 @@ const store = new Vuex.Store({
         login ({commit}, user) {
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios.post('http://127.0.0.1:8000/api/auth/login', user)
+                axios.post('/api/auth/login', user)
                 .then(response => {
                     const token = response.data.access_token
                     localStorage.setItem('token', token)
@@ -53,7 +53,7 @@ const store = new Vuex.Store({
         register ({commit}, user){
             return new Promise((resolve, reject) => {
                 commit('auth_request')
-                axios({url : 'http://127.0.0.1:8000/api/auth/register', data : user, method : 'POST'})
+                axios({url : '/api/auth/register', data : user, method : 'POST'})
                 .then(response => {
                     console.log(response)
                     const token = response.headers.authorization

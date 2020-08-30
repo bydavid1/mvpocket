@@ -41,7 +41,7 @@ export default {
             add () {
                 console.log("collection: " + this.collection)
                 axios
-                .post('http://localhost:8000/api/auth/collection/store', this.collection)
+                .post('/api/auth/collection/store', this.collection)
                 .then(response => {
                     this.$router.push({name: 'collections'})
                 })

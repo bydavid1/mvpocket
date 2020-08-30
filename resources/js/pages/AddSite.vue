@@ -52,7 +52,7 @@ export default {
             add () {
                 this.load = true
                 axios
-                .get('http://localhost:8000/api/auth/fetchOpenGraph?url=' + this.url)
+                .get('/api/auth/fetchOpenGraph?url=' + this.url)
                 .then(response => {
                     let data = response.data;
                     this.site.title = data.data.title;
@@ -72,7 +72,7 @@ export default {
             },
             store () {
                 axios
-                .post('http://localhost:8000/api/auth/collection/'+ this.$route.params.id +'/site/store', this.site)
+                .post('/api/auth/collection/'+ this.$route.params.id +'/site/store', this.site)
                 .then(response => {
                     this.$router.push({name: 'sitescollection', params: this.$route.params.id})
                 })
