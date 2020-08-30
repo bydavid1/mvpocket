@@ -37,7 +37,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Bienvenido</h1>
+                            <h1 class="m-0 text-dark">Bienvenido {{ username }}</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -70,11 +70,24 @@
 <script>
     export default {
         name : "Home",
-        methods : {
-                logout () {
-                    this.$store.dispatch('logout')
-                    .then(() =>  this.$router.push('/') )
-                }
+        data () {
+            return {
+                username : ""
             }
+        },
+        methods : {
+            logout () {
+                this.$store.dispatch('logout')
+                .then(() =>  this.$router.push('/') )
+            }
+        },
+        created () {
+            axios
+            .post('http://127.0.0.1:8000/api/auth/me')
+            .then(response => {
+                this.username = response.data.name
+            });
         }
+    }
+        
 </script>

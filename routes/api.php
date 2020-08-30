@@ -32,11 +32,13 @@ Route::prefix('auth')->group(function () {
     
     // Below mention routes are available only for the authenticated users.
     Route::middleware('auth:api')->group(function () {
-        // Get user info
-        Route::get('user', 'AuthController@user');
 
-        // Logout user from application
+        // Auth Routes
+
+        Route::post('me', 'AuthController@me');
         Route::post('logout', 'AuthController@logout');
+
+        // CRUD Routes
 
         Route::get('collection' , 'CollectionController@index');
         Route::post('collection/store' , 'CollectionController@store');

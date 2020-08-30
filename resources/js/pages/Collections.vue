@@ -25,11 +25,12 @@ export default {
         }
     },
     created() {
-        this.axios
-        .get('http://127.0.0.1:8000/api/collection')
+        axios
+        .get('http://127.0.0.1:8000/api/auth/collection')
         .then(response => {
             this.collections = response.data;
-        });
+        })
+        .catch(error => console.log(error.response.data));
     },
     components:{
         Card

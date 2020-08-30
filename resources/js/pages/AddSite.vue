@@ -51,8 +51,8 @@ export default {
         methods : {
             add () {
                 this.load = true
-                this.axios
-                .get('http://localhost:8000/api/fetchOpenGraph?url=' + this.url)
+                axios
+                .get('http://localhost:8000/api/auth/fetchOpenGraph?url=' + this.url)
                 .then(response => {
                     let data = response.data;
                     this.site.title = data.data.title;
@@ -71,8 +71,8 @@ export default {
                 })
             },
             store () {
-                this.axios
-                .post('http://localhost:8000/api/collection/'+ this.$route.params.id +'/site/store', this.site)
+                axios
+                .post('http://localhost:8000/api/auth/collection/'+ this.$route.params.id +'/site/store', this.site)
                 .then(response => {
                     this.$router.push({name: 'sitescollection', params: this.$route.params.id})
                 })

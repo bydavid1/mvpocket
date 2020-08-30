@@ -8,7 +8,6 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         auth: false,
-        user: {},
         token : localStorage.getItem('token') || "",
         status : ''
     },
@@ -16,10 +15,9 @@ const store = new Vuex.Store({
         auth_request : function (state) {
             state.status = 'loading'
         },
-        auth_success : function (state, token, user) {
+        auth_success : function (state, token) {
             state.status = 'finished'
             state.auth = true
-            state.user = user 
             state.token = token
         },
         auth_error : function (state) {
@@ -30,7 +28,6 @@ const store = new Vuex.Store({
             state.token = ''
             state.status = ''
             state.auth = false
-            state.user = {}
         }
     },
     actions : {
@@ -39,12 +36,10 @@ const store = new Vuex.Store({
                 commit('auth_request')
                 axios.post('http://127.0.0.1:8000/api/auth/login', user)
                 .then(response => {
-                    console.log(response)
-                    const token = response.data.token
-                    const user = response.data.user
+                    const token = response.data.access_token
                     localStorage.setItem('token', token)
-                    axios.defaults.headers.common['Authorization'] = token
-                    commit('auth_success', token, user)
+                    axios.defaults.headers.common['Authorization'] = "Bearer" + token
+                    commit('auth_success', token)
                     resolve('resp')
                 })
                 .catch(err => {
@@ -62,10 +57,9 @@ const store = new Vuex.Store({
                 .then(response => {
                     console.log(response)
                     const token = response.headers.authorization
-                    const user = response.data.user
                     localStorage.setItem('token', token)
-                    axios.defaults.headers.common['Authorization'] = token
-                    commit('auth_success', token, user)
+                    axios.defaults.headers.common['Authorization'] = "Bearer" + token
+                    commit('auth_success', token)
                     resolve('resp')
                 })
                 .catch(err => {
@@ -88,7 +82,6 @@ const store = new Vuex.Store({
     getters : {
         isAuth : state => state.token,
         auth_status : state => state.status,
-        getUser : state => state.user
     }
 
 })

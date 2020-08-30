@@ -6,8 +6,8 @@ namespace App\Http\Controllers;
 error_reporting(E_ALL);
 ini_set('error_reporting', E_ALL);
 
-use App\Collection;
 use Exception;
+use App\Collection;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -19,8 +19,15 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $data = Collection::orderBy('id', 'desc')->get();
-        return response()->json($data);
+        try {
+            $user = auth()->user();
+            if ($user != null) {
+                $data = Collection::orderBy('id', 'desc')->where('users_id', $user->id)->get();
+                return response()->json($data);
+            }
+        } catch (Exception $e) {
+            return response(["Error" => $e->getMessage()], 500);
+        }
     }
 
     /**
@@ -32,12 +39,20 @@ class CollectionController extends Controller
     public function store(Request $request)
     {
         try {
+
+            $user = auth()->user();
+            
+            if ($user == null) {
+                return response()->json(["message" => "user not found"], 404);
+            }
+
             $collection = new Collection([
                 'name' => $request['name'],
                 'description' => $request['description'],
-                'users_id' => "1",
+                'users_id' => $user->id,
                 'image' => "image/image"
             ]);
+
             $collection->save();
      
             return response()->json('The collection successfully added', 200);

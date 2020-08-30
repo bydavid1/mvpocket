@@ -21,8 +21,14 @@ class SiteController extends Controller
      */
     public function index($id)
     {
+
+        if (auth()->user() == null) {
+            return response()->json(["message" => "user not found"], 404);
+        }
+
         $data = Site::orderBy('id', 'desc')->where('collection_id', $id)->get();
         return response()->json($data);
+
     }
 
     /**
@@ -51,6 +57,10 @@ class SiteController extends Controller
     public function store(Request $request, $id)
     {
         try {
+            if (auth()->user() == null) {
+                return response()->json(["message" => "user not found"], 404);
+            }
+            
             $site = new Site();
             $site->collection_id = $id;
             $site->url = $request['url'];

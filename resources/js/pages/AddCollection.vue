@@ -40,8 +40,8 @@ export default {
         methods : {
             add () {
                 console.log("collection: " + this.collection)
-                this.axios
-                .post('http://localhost:8000/api/collection/store', this.collection)
+                axios
+                .post('http://localhost:8000/api/auth/collection/store', this.collection)
                 .then(response => {
                     this.$router.push({name: 'collections'})
                 })

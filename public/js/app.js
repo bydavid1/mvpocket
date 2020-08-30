@@ -2057,7 +2057,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       console.log("collection: " + this.collection);
-      this.axios.post('http://localhost:8000/api/collection/store', this.collection).then(function (response) {
+      axios.post('http://localhost:8000/api/auth/collection/store', this.collection).then(function (response) {
         _this.$router.push({
           name: 'collections'
         });
@@ -2135,7 +2135,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.load = true;
-      this.axios.get('http://localhost:8000/api/fetchOpenGraph?url=' + this.url).then(function (response) {
+      axios.get('http://localhost:8000/api/auth/fetchOpenGraph?url=' + this.url).then(function (response) {
         var data = response.data;
         _this.site.title = data.data.title;
         _this.site.description = data.data.description;
@@ -2154,7 +2154,7 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this2 = this;
 
-      this.axios.post('http://localhost:8000/api/collection/' + this.$route.params.id + '/site/store', this.site).then(function (response) {
+      axios.post('http://localhost:8000/api/auth/collection/' + this.$route.params.id + '/site/store', this.site).then(function (response) {
         _this2.$router.push({
           name: 'sitescollection',
           params: _this2.$route.params.id
@@ -2211,8 +2211,10 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get('http://127.0.0.1:8000/api/collection').then(function (response) {
+    axios.get('http://127.0.0.1:8000/api/auth/collection').then(function (response) {
       _this.collections = response.data;
+    })["catch"](function (error) {
+      return console.log(error.response.data);
     });
   },
   components: {
@@ -2302,6 +2304,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
+  data: function data() {
+    return {
+      username: ""
+    };
+  },
   methods: {
     logout: function logout() {
       var _this = this;
@@ -2310,6 +2317,13 @@ __webpack_require__.r(__webpack_exports__);
         return _this.$router.push('/');
       });
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    axios.post('http://127.0.0.1:8000/api/auth/me').then(function (response) {
+      _this2.username = response.data.name;
+    });
   }
 });
 
@@ -2354,7 +2368,7 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    this.axios.get('http://127.0.0.1:8000/api/collection/id/sites'.replace('id', this.$route.params.id)).then(function (response) {
+    axios.get('http://127.0.0.1:8000/api/auth/collection/id/sites'.replace('id', this.$route.params.id)).then(function (response) {
       _this.sites = response.data;
     });
   },
@@ -39448,7 +39462,19 @@ var render = function() {
           staticStyle: { "min-height": "103px" }
         },
         [
-          _vm._m(2),
+          _c("div", { staticClass: "content-header" }, [
+            _c("div", { staticClass: "container-fluid" }, [
+              _c("div", { staticClass: "row mb-2" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
+                  _c("h1", { staticClass: "m-0 text-dark" }, [
+                    _vm._v("Bienvenido " + _vm._s(_vm.username))
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(2)
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "content" }, [
             _c(
@@ -39531,24 +39557,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Bienvenido")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6" }, [
-            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item active" }, [
-                _vm._v("Starter Page")
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+        _c("li", { staticClass: "breadcrumb-item" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "breadcrumb-item active" }, [
+          _vm._v("Starter Page")
         ])
       ])
     ])
@@ -56577,7 +56593,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http = axios__WEBPACK_IMPO
 var token = localStorage.getItem('token');
 
 if (token) {
-  vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http.defaults.headers.common['Authorization'] = token;
+  vue__WEBPACK_IMPORTED_MODULE_0___default.a.prototype.$http.defaults.headers.common['Authorization'] = "Bearer" + token;
 }
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.router = _router_router__WEBPACK_IMPORTED_MODULE_2__["default"];
@@ -57478,7 +57494,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     auth: false,
-    user: {},
     token: localStorage.getItem('token') || "",
     status: ''
   },
@@ -57486,10 +57501,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     auth_request: function auth_request(state) {
       state.status = 'loading';
     },
-    auth_success: function auth_success(state, token, user) {
+    auth_success: function auth_success(state, token) {
       state.status = 'finished';
       state.auth = true;
-      state.user = user;
       state.token = token;
     },
     auth_error: function auth_error(state) {
@@ -57500,7 +57514,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       state.token = '';
       state.status = '';
       state.auth = false;
-      state.user = {};
     }
   },
   actions: {
@@ -57509,12 +57522,10 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
       return new Promise(function (resolve, reject) {
         commit('auth_request');
         axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('http://127.0.0.1:8000/api/auth/login', user).then(function (response) {
-          console.log(response);
-          var token = response.data.token;
-          var user = response.data.user;
+          var token = response.data.access_token;
           localStorage.setItem('token', token);
-          axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['Authorization'] = token;
-          commit('auth_success', token, user);
+          axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['Authorization'] = "Bearer" + token;
+          commit('auth_success', token);
           resolve('resp');
         })["catch"](function (err) {
           console.log(err);
@@ -57535,10 +57546,9 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
         }).then(function (response) {
           console.log(response);
           var token = response.headers.authorization;
-          var user = response.data.user;
           localStorage.setItem('token', token);
-          axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['Authorization'] = token;
-          commit('auth_success', token, user);
+          axios__WEBPACK_IMPORTED_MODULE_3___default.a.defaults.headers.common['Authorization'] = "Bearer" + token;
+          commit('auth_success', token);
           resolve('resp');
         })["catch"](function (err) {
           console.log('store register:' + err);
@@ -57564,9 +57574,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     },
     auth_status: function auth_status(state) {
       return state.status;
-    },
-    getUser: function getUser(state) {
-      return state.user;
     }
   }
 });
