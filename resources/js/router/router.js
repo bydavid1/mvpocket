@@ -39,7 +39,7 @@ const router = new VueRouter({
         },
         children: [
             {
-                path:"/collections",
+                path:"/",
                 name: "collections",
                 component: Collection,
             },

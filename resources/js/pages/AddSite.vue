@@ -1,30 +1,40 @@
 <template>
-    <div class="container">
-        <div class="card mb-3">
-            <div class="card-body">
-                <div class="alert alert-danger alert-dismissible" role="alert" v-show="hasError">
-                    {{ errorresponse }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form @submit.prevent="add">
-                    <div class="form-group">
-                        <label>Ingresa la url</label>
-                        <input type="text" class="form-control" placeholder="Type url" v-model="url">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="alert alert-danger alert-dismissible" role="alert" v-show="hasError">
+                            {{ errorresponse }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form @submit.prevent="add">
+                            <div class="form-group">
+                                <label>Ingresa la url</label>
+                                <input type="text" class="form-control" placeholder="Type url" v-model="url">
+                            </div>
+                            <button class="btn btn-gradient-success btn-rounded btn-block" type="submit">
+                                <span v-if="load" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                <i class="mdi mdi-plus-box-multiple mr-1"></i>
+                                Inspeccionar sitio
+                            </button>
+                        </form>
                     </div>
-                    <button class="btn btn-primary" type="submit">
-                        <span v-if="load" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                        Inspeccionar sitio
-                    </button>
-                </form>
+                </div>
             </div>
-        </div>
-        <div v-show="site.showCard" class="col-md-5">
-            <h5>Preview</h5>
-            <CardImage :title="site.title" :description="site.description" :url="site.url" 
-                :image="site.image"></CardImage>
-                <button class="btn btn-success my-3" v-on:click="store">Guardar</button>
+            <div class="col-md-5">
+                <div v-show="site.showCard">
+                    <h5>Preview</h5>
+                    <CardImage :title="site.title" :description="site.description" :url="site.url" 
+                        :image="site.image"></CardImage>
+                        <button class="btn btn-gradient-info btn-rounded mt-2 btn-block" v-on:click="store">
+                            <i class="mdi mdi-plus-box-multiple mr-1"></i>
+                            Guardar sitio
+                        </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -76,10 +86,9 @@ export default {
                 .then(response => {
                     this.$router.push({name: 'sitescollection', params: this.$route.params.id})
                 })
-                .catch(error => { 
-                    console.log(error)
+                .catch(error => {
                     this.hasError = true 
-                    this.errorresponse = error
+                    this.errorresponse = error.response.data.message
                 })
             }
         },

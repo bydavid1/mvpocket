@@ -2,12 +2,15 @@
     <div>
         <div v-if="collections == null">
             <h1>Aun no hay colecciones guardadas</h1>
-            <router-link to="/collections/add" class="btn btn-success mb-3">Crear coleccion</router-link>
+            <router-link to="/collections/add" class="btn btn-gradient-success mb-3">Crear coleccion</router-link>
         </div>
         <div class="container" v-else>
-            <router-link to="/collections/add" class="btn btn-success mb-3">Agregar nueva coleccion</router-link>
+            <router-link to="/collections/add" class="btn btn-gradient-success btn-rounded mb-5 btn-block">
+                <i class="mdi mdi-plus-box-multiple mr-1"></i>
+                Agregar nueva coleccion
+            </router-link>
             <div class="row">
-                <div class="col-md-6" v-for="collection in collections" :key="collection.id">
+                <div class="col-md-6 stretch-card grid-margin" v-for="collection in collections" :key="collection.id">
                     <Card :title="collection.name" :description="collection.description" :id="collection.id" class=" mb-4"/>
                 </div>
             </div>

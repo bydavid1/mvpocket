@@ -36,7 +36,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => 'error',
                 'errors' => $v->errors(),
-                'request' => $request
+                'message' => "Invalid data"
             ], 422);
         }
         $user = new User();
@@ -55,7 +55,7 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Incorrect data'], 401);
+            return response()->json(['message' => 'Incorrect data'], 401);
         }
 
         return $this->respondWithToken($token);

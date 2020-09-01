@@ -42,11 +42,10 @@ const store = new Vuex.Store({
                     commit('auth_success', token)
                     resolve('resp')
                 })
-                .catch(err => {
-                    console.log(err)
+                .catch(error => {
                     commit('auth_error')
                     localStorage.removeItem('token')
-                    reject('err')
+                    reject(error.response.data.message)
                 })
             })
         },
@@ -62,11 +61,10 @@ const store = new Vuex.Store({
                     commit('auth_success', token)
                     resolve('resp')
                 })
-                .catch(err => {
-                    console.log('store register:' + err)
+                .catch(error => {
                     commit('auth_error')
                     localStorage.removeItem('token')
-                    reject('err')
+                    reject(error.response.data.message)
                 })
             })
         },
