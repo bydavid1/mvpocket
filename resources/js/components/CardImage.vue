@@ -40,11 +40,12 @@ export default {
 <style>
     .image-container{
         width: 100%;
-        height: 325px;
+        height: 250px;
     }
 
     .card-info{
-        height: 200px;
+        height: 250px;
+        overflow: hidden;
     }
 
     .image-div{

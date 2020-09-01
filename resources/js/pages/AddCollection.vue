@@ -1,5 +1,15 @@
 <template>
     <div class="container">
+        <div class="page-header">
+            <h3 class="page-title">Agregar sitio </h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Colecciones</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Agregar collecion</li>
+                </ol>
+            </nav>
+        </div>
         <div class="card">
             <div class="card-body">
                 <div class="alert alert-danger alert-dismissible" role="alert" v-show="hasError">
@@ -11,13 +21,15 @@
                 <form @submit.prevent="add">
                     <div class="form-group">
                         <label>Nombre de la coleccion</label>
-                        <input type="text" class="form-control" placeholder="Type name" v-model="collection.name">
+                        <input type="text" class="form-control" placeholder="Type name" v-model="collection.name" required>
                     </div>
                     <div class="form-group">
                         <label>Descripcion</label>
-                        <input type="text" class="form-control" placeholder="Type descripiton" v-model="collection.description">
+                        <input type="text" class="form-control" placeholder="Type descripiton" v-model="collection.description" required>
                     </div>
-                    <button type="submit" class=" btn btn-primary" >Guardar coleccion</button>
+                    <button type="submit" class="btn btn-gradient-info btn-rounded" >
+                        <i class="mdi mdi-plus-box-multiple"></i>
+                        Guardar coleccion</button>
                 </form>
             </div>
         </div>
@@ -30,8 +42,8 @@ export default {
         data () {
             return {
                 collection: {
-                    name: "Collection example",
-                    description: "This is an description about this collection"
+                    name: "",
+                    description: ""
                 },
                 errorresponse: "",
                 hasError: false,

@@ -1,5 +1,15 @@
 <template>
-    <div class="content-wrapper">
+    <div>
+        <div class="page-header">
+            <h3 class="page-title">Agregar sitio </h3>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Colecciones</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Agregar sitios</li>
+                </ol>
+            </nav>
+        </div>
         <div class="row">
             <div class="col-md-7">
                 <div class="card mb-3">

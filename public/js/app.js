@@ -1954,7 +1954,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
-  props: ['title', 'description', 'id']
+  props: ['title', 'description', 'id', 'favorite']
 });
 
 /***/ }),
@@ -2042,13 +2042,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddCollection",
   data: function data() {
     return {
       collection: {
-        name: "Collection example",
-        description: "This is an description about this collection"
+        name: "",
+        description: ""
       },
       errorresponse: "",
       hasError: false
@@ -2083,6 +2095,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CardImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/CardImage */ "./resources/js/components/CardImage.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2194,6 +2216,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Card__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Card */ "./resources/js/components/Card.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2399,40 +2432,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
   data: function data() {
@@ -2470,6 +2469,14 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CardImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/CardImage */ "./resources/js/components/CardImage.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7202,7 +7209,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.image-container{\n    width: 100%;\n    height: 325px;\n}\n.card-info{\n    height: 200px;\n}\n.image-div{\n    width: 100%;\n    height: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.image-container{\n    width: 100%;\n    height: 250px;\n}\n.card-info{\n    height: 250px;\n    overflow: hidden;\n}\n.image-div{\n    width: 100%;\n    height: 100%;\n}\n", ""]);
 
 // exports
 
@@ -39094,8 +39101,11 @@ var render = function() {
         }),
         _vm._v(" "),
         _c("h4", { staticClass: "font-weight-normal mb-3" }, [
-          _vm._v(_vm._s(_vm.title)),
-          _c("i", { staticClass: "mdi mdi-buffer mdi-24px float-right" })
+          _vm._v(_vm._s(_vm.title) + "\n            "),
+          _c("i", {
+            staticClass: "mdi mdi-heart mdi-24px float-right",
+            on: { click: _vm.favorite }
+          })
         ]),
         _vm._v(" "),
         _c("h6", { staticClass: "card-text" }, [
@@ -39193,6 +39203,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "card" }, [
       _c("div", { staticClass: "card-body" }, [
         _c(
@@ -39215,7 +39227,7 @@ var render = function() {
                 _vm._s(_vm.errorresponse) +
                 "\n                "
             ),
-            _vm._m(0)
+            _vm._m(1)
           ]
         ),
         _vm._v(" "),
@@ -39243,7 +39255,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Type name" },
+                attrs: { type: "text", placeholder: "Type name", required: "" },
                 domProps: { value: _vm.collection.name },
                 on: {
                   input: function($event) {
@@ -39269,7 +39281,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Type descripiton" },
+                attrs: {
+                  type: "text",
+                  placeholder: "Type descripiton",
+                  required: ""
+                },
                 domProps: { value: _vm.collection.description },
                 on: {
                   input: function($event) {
@@ -39282,11 +39298,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c(
-              "button",
-              { staticClass: " btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Guardar coleccion")]
-            )
+            _vm._m(2)
           ]
         )
       ])
@@ -39294,6 +39306,35 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-header" }, [
+      _c("h3", { staticClass: "page-title" }, [_vm._v("Agregar sitio ")]),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+        _c("ol", { staticClass: "breadcrumb" }, [
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Colecciones")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "breadcrumb-item active",
+              attrs: { "aria-current": "page" }
+            },
+            [_vm._v("Agregar collecion")]
+          )
+        ])
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -39309,6 +39350,22 @@ var staticRenderFns = [
         }
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-gradient-info btn-rounded",
+        attrs: { type: "submit" }
+      },
+      [
+        _c("i", { staticClass: "mdi mdi-plus-box-multiple" }),
+        _vm._v("\n                    Guardar coleccion")
+      ]
     )
   }
 ]
@@ -39333,7 +39390,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content-wrapper" }, [
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-7" }, [
         _c("div", { staticClass: "card mb-3" }, [
@@ -39358,7 +39417,7 @@ var render = function() {
                     _vm._s(_vm.errorresponse) +
                     "\n                        "
                 ),
-                _vm._m(0)
+                _vm._m(1)
               ]
             ),
             _vm._v(" "),
@@ -39476,6 +39535,35 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-header" }, [
+      _c("h3", { staticClass: "page-title" }, [_vm._v("Agregar sitio ")]),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+        _c("ol", { staticClass: "breadcrumb" }, [
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Colecciones")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "breadcrumb-item active",
+              attrs: { "aria-current": "page" }
+            },
+            [_vm._v("Agregar sitios")]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c(
       "button",
       {
@@ -39512,6 +39600,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
     _vm.collections == null
       ? _c(
           "div",
@@ -39576,7 +39666,35 @@ var render = function() {
         )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "page-header" }, [
+        _c("h3", { staticClass: "page-title" }, [_vm._v(" Colecciones ")]),
+        _vm._v(" "),
+        _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+          _c("ol", { staticClass: "breadcrumb" }, [
+            _c("li", { staticClass: "breadcrumb-item" }, [
+              _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+            ]),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "breadcrumb-item active",
+                attrs: { "aria-current": "page" }
+              },
+              [_vm._v("Colleciones")]
+            )
+          ])
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -39621,7 +39739,7 @@ var render = function() {
                 _c(
                   "a",
                   {
-                    staticClass: "nav-link dropdown-toggle",
+                    staticClass: "nav-link",
                     attrs: {
                       id: "profileDropdown",
                       href: "#",
@@ -39634,7 +39752,10 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "nav-profile-text" }, [
                       _c("p", { staticClass: "mb-1 text-black" }, [
-                        _vm._v(_vm._s(_vm.username))
+                        _vm._v(_vm._s(_vm.username) + " "),
+                        _c("i", {
+                          staticClass: "mdi mdi-menu-down text-primary ml-2"
+                        })
                       ])
                     ])
                   ]
@@ -39672,12 +39793,10 @@ var render = function() {
               _vm._v(" "),
               _vm._m(6),
               _vm._v(" "),
-              _vm._m(7),
-              _vm._v(" "),
-              _vm._m(8)
+              _vm._m(7)
             ]),
             _vm._v(" "),
-            _vm._m(9)
+            _vm._m(8)
           ]
         )
       ]
@@ -39744,7 +39863,47 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _vm._m(10)
+            _vm._m(9),
+            _vm._v(" "),
+            _vm._m(10),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link", attrs: { to: "/home" } },
+                  [
+                    _c("span", { staticClass: "menu-title" }, [
+                      _vm._v("Acerca de")
+                    ]),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "mdi menu-icon mdi-information" })
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "li",
+              { staticClass: "nav-item" },
+              [
+                _c(
+                  "router-link",
+                  { staticClass: "nav-link", attrs: { to: "/home" } },
+                  [
+                    _c("span", { staticClass: "menu-title" }, [
+                      _vm._v("Codigo")
+                    ]),
+                    _vm._v(" "),
+                    _c("i", { staticClass: "mdi menu-icon mdi-github" })
+                  ]
+                )
+              ],
+              1
+            )
           ])
         ]
       ),
@@ -39769,14 +39928,9 @@ var staticRenderFns = [
           "text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
       },
       [
-        _c(
-          "a",
-          {
-            staticClass: "navbar-brand brand-logo",
-            attrs: { href: "index.html" }
-          },
-          [_c("img", { attrs: { src: "images/logo.svg", alt: "logo" } })]
-        ),
+        _c("a", { attrs: { href: "index.html" } }, [
+          _c("img", { attrs: { src: "images/logo.png", alt: "logo" } })
+        ]),
         _vm._v(" "),
         _c(
           "a",
@@ -39784,7 +39938,7 @@ var staticRenderFns = [
             staticClass: "navbar-brand brand-logo-mini",
             attrs: { href: "index.html" }
           },
-          [_c("img", { attrs: { src: "images/logo-mini.svg", alt: "logo" } })]
+          [_c("img", { attrs: { src: "images/logo.png", alt: "logo" } })]
         )
       ]
     )
@@ -39870,136 +40024,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "nav-item dropdown" }, [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link count-indicator dropdown-toggle",
-          attrs: {
-            id: "notificationDropdown",
-            href: "#",
-            "data-toggle": "dropdown"
-          }
-        },
-        [
-          _c("i", { staticClass: "mdi mdi-bell-outline" }),
-          _vm._v(" "),
-          _c("span", { staticClass: "count-symbol bg-danger" })
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass:
-            "dropdown-menu dropdown-menu-right navbar-dropdown preview-list",
-          attrs: { "aria-labelledby": "notificationDropdown" }
-        },
-        [
-          _c("h6", { staticClass: "p-3 mb-0" }, [_vm._v("Notifications")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-divider" }),
-          _vm._v(" "),
-          _c("a", { staticClass: "dropdown-item preview-item" }, [
-            _c("div", { staticClass: "preview-thumbnail" }, [
-              _c("div", { staticClass: "preview-icon bg-success" }, [
-                _c("i", { staticClass: "mdi mdi-calendar" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "preview-item-content d-flex align-items-start flex-column justify-content-center"
-              },
-              [
-                _c(
-                  "h6",
-                  { staticClass: "preview-subject font-weight-normal mb-1" },
-                  [_vm._v("Event today")]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-gray ellipsis mb-0" }, [
-                  _vm._v(
-                    " Just a reminder that you have an event today\n                                "
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-divider" }),
-          _vm._v(" "),
-          _c("a", { staticClass: "dropdown-item preview-item" }, [
-            _c("div", { staticClass: "preview-thumbnail" }, [
-              _c("div", { staticClass: "preview-icon bg-warning" }, [
-                _c("i", { staticClass: "mdi mdi-settings" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "preview-item-content d-flex align-items-start flex-column justify-content-center"
-              },
-              [
-                _c(
-                  "h6",
-                  { staticClass: "preview-subject font-weight-normal mb-1" },
-                  [_vm._v("Settings")]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-gray ellipsis mb-0" }, [
-                  _vm._v(" Update dashboard ")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-divider" }),
-          _vm._v(" "),
-          _c("a", { staticClass: "dropdown-item preview-item" }, [
-            _c("div", { staticClass: "preview-thumbnail" }, [
-              _c("div", { staticClass: "preview-icon bg-info" }, [
-                _c("i", { staticClass: "mdi mdi-link-variant" })
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "preview-item-content d-flex align-items-start flex-column justify-content-center"
-              },
-              [
-                _c(
-                  "h6",
-                  { staticClass: "preview-subject font-weight-normal mb-1" },
-                  [_vm._v("Launch Admin")]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-gray ellipsis mb-0" }, [
-                  _vm._v(" New admin wow! ")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "dropdown-divider" }),
-          _vm._v(" "),
-          _c("h6", { staticClass: "p-3 mb-0 text-center" }, [
-            _vm._v("See all notifications")
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("li", { staticClass: "nav-item nav-logout d-none d-lg-block" }, [
       _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
         _c("i", { staticClass: "mdi mdi-power" })
@@ -40015,7 +40039,7 @@ var staticRenderFns = [
       { staticClass: "nav-item nav-settings d-none d-lg-block" },
       [
         _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "mdi mdi-format-line-spacing" })
+          _c("i", { staticClass: "mdi mdi-plus-box-multiple" })
         ])
       ]
     )
@@ -40041,15 +40065,16 @@ var staticRenderFns = [
     return _c("li", { staticClass: "nav-item sidebar-actions" }, [
       _c("span", { staticClass: "nav-link" }, [
         _c("div", { staticClass: "border-bottom" }, [
-          _c("h6", { staticClass: "font-weight-normal mb-3" }, [
-            _vm._v("Projects")
-          ])
+          _c("h6", { staticClass: "text-secondary mb-3" }, [_vm._v("Acciones")])
         ]),
         _vm._v(" "),
         _c(
           "button",
-          { staticClass: "btn btn-block btn-lg btn-gradient-primary mt-4" },
-          [_vm._v("+ Add a project")]
+          {
+            staticClass:
+              "btn btn-block btn-lg btn-gradient-dark btn-rounded mt-4"
+          },
+          [_vm._v("+ Add site")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "mt-4" }, [
@@ -40062,6 +40087,18 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("li", [_vm._v("Pro")])
           ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item sidebar-actions" }, [
+      _c("span", { staticClass: "nav-link" }, [
+        _c("div", { staticClass: "border-bottom" }, [
+          _c("p", { staticClass: "text-secondary" }, [_vm._v("Informacion")])
         ])
       ])
     ])
@@ -40137,44 +40174,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mx-5" }, [
-    _c("div", { staticClass: "container" }, [
-      _vm.sites.length == 0
-        ? _c(
-            "div",
-            [
-              _c("h1", [_vm._v("Aun no hay sitios guaradados")]),
-              _vm._v(" "),
-              _c(
-                "router-link",
-                {
-                  staticClass: "btn btn-success mb-3",
-                  attrs: { to: _vm.savepath }
-                },
-                [_vm._v("Guardar sitio")]
-              )
-            ],
-            1
-          )
-        : _c(
-            "div",
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "btn btn-gradient-info btn-rounded mb-5 btn-block",
-                  attrs: { to: _vm.savepath }
-                },
-                [
-                  _c("i", { staticClass: "mdi mdi-plus-box-multiple mr-1" }),
-                  _vm._v("\n                Agregar sitio\n            ")
-                ]
-              )
-            ],
-            1
-          )
-    ]),
+  return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _vm.sites.length == 0
+      ? _c(
+          "div",
+          [
+            _c("h1", [_vm._v("Aun no hay sitios guaradados")]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-success mb-3",
+                attrs: { to: _vm.savepath }
+              },
+              [_vm._v("Guardar sitio")]
+            )
+          ],
+          1
+        )
+      : _c(
+          "div",
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-gradient-info btn-rounded mb-5 btn-block",
+                attrs: { to: _vm.savepath }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-plus-box-multiple mr-1" }),
+                _vm._v("\n            Agregar sitio\n        ")
+              ]
+            )
+          ],
+          1
+        ),
     _vm._v(" "),
     _c(
       "div",
@@ -40200,7 +40236,37 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "page-header" }, [
+      _c("h3", { staticClass: "page-title" }, [_vm._v("Guardados ")]),
+      _vm._v(" "),
+      _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+        _c("ol", { staticClass: "breadcrumb" }, [
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "breadcrumb-item" }, [
+            _c("a", { attrs: { href: "#" } }, [_vm._v("Colecciones")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass: "breadcrumb-item active",
+              attrs: { "aria-current": "page" }
+            },
+            [_vm._v("Sitios guardados")]
+          )
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

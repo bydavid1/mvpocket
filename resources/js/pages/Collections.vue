@@ -1,5 +1,16 @@
 <template>
     <div>
+        <div class="container">
+            <div class="page-header">
+                <h3 class="page-title"> Colecciones </h3>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Colleciones</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
         <div v-if="collections == null">
             <h1>Aun no hay colecciones guardadas</h1>
             <router-link to="/collections/add" class="btn btn-gradient-success mb-3">Crear coleccion</router-link>
