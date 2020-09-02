@@ -8,6 +8,7 @@ ini_set('error_reporting', E_ALL);
 
 use Exception;
 use App\Collection;
+use App\Theme;
 use Illuminate\Http\Request;
 
 class CollectionController extends Controller
@@ -22,7 +23,7 @@ class CollectionController extends Controller
         try {
             $user = auth()->user();
             if ($user != null) {
-                $data = Collection::orderBy('id', 'desc')->where('users_id', $user->id)->get();
+                $data = Collection::orderBy('id', 'desc')->with('theme')->where('users_id', $user->id)->get();
                 return response()->json($data);
             }
         } catch (Exception $e) {
@@ -41,7 +42,7 @@ class CollectionController extends Controller
         try {
             $user = auth()->user();
             if ($user != null) {
-                $data = Collection::orderBy('id', 'desc')->where('users_id', $user->id)->where('favorite', 1)->get();
+                $data = Collection::orderBy('id', 'desc')->with('theme')->where('users_id', $user->id)->where('favorite', 1)->get();
                 return response()->json($data);
             }
         } catch (Exception $e) {
@@ -109,14 +110,32 @@ class CollectionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * change theme.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function theme($id, Request $request)
     {
-        //
+        try {
+            $user = auth()->user();
+            
+            if ($user == null) {
+                return response()->json(["message" => "user not found"], 404);
+            }
+
+            $collection = Collection::findOrFail($id);
+            $theme = Theme::where('name', $request->theme)->get();
+            $collection->theme_id = $theme[0]->id;
+            if ($collection->save()) {
+                return response()->json('theme toggled', 200);
+            }else{
+                return response()->json('theme not toggled', 500);
+            }
+
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
     }
 
     /**

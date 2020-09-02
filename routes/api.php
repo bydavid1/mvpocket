@@ -44,6 +44,7 @@ Route::prefix('auth')->group(function () {
         Route::get('collection/favorites' , 'CollectionController@getFavorites');
         Route::post('collection/store' , 'CollectionController@store');
         Route::put('collection/{id}/togglefav' , 'CollectionController@favorite');
+        Route::put('collection/{id}/toggletheme' , 'CollectionController@theme');
         Route::get('collection/edit/{id}' , 'CollectionController@edit');
         Route::put('collection/update/{id}' , 'CollectionController@update');
         Route::delete('collection/delete/{id}' , 'CollectionController@destroy');

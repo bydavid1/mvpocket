@@ -1951,6 +1951,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   props: {
@@ -1966,6 +1994,10 @@ __webpack_require__.r(__webpack_exports__);
     favorite: {
       type: Number,
       "default": 0
+    },
+    theme: {
+      type: String,
+      "default": "danger"
     }
   },
   computed: {
@@ -2293,12 +2325,21 @@ __webpack_require__.r(__webpack_exports__);
     togglefav: function togglefav(id) {
       var _this2 = this;
 
-      axios.put('/api/auth/collection/' + id + '/togglefav', {
-        'id': this.id
-      }).then(function () {
+      axios.put('/api/auth/collection/' + id + '/togglefav').then(function () {
         _this2.getCollections();
       })["catch"](function (err) {
         return console.log(err);
+      });
+    },
+    toggletheme: function toggletheme(id, theme) {
+      var _this3 = this;
+
+      axios.put('/api/auth/collection/' + id + '/toggletheme', {
+        'theme': theme
+      }).then(function () {
+        _this3.getCollections();
+      })["catch"](function (err) {
+        return console.log(err.response.data);
       });
     }
   }
@@ -2377,6 +2418,17 @@ __webpack_require__.r(__webpack_exports__);
         _this2.getCollections();
       })["catch"](function (err) {
         return console.log(err);
+      });
+    },
+    toggletheme: function toggletheme(id, theme) {
+      var _this3 = this;
+
+      axios.put('/api/auth/collection/' + id + '/toggletheme', {
+        'theme': theme
+      }).then(function () {
+        _this3.getCollections();
+      })["catch"](function (err) {
+        return console.log(err.response.data);
       });
     }
   }
@@ -39260,7 +39312,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "card bg-gradient-danger card-img-holder text-white" },
+    {
+      class: [
+        "card",
+        "bg-gradient-" + _vm.theme,
+        "card-img-holder",
+        "text-white"
+      ]
+    },
     [
       _c("div", { staticClass: "card-body" }, [
         _c("img", {
@@ -39272,20 +39331,134 @@ var render = function() {
           _vm._v(_vm._s(_vm.title))
         ]),
         _vm._v(" "),
-        _c("i", {
-          class: [
-            "mdi",
-            _vm.isfavorite,
-            "mdi-36px",
-            "float-right",
-            "card-icon"
-          ],
-          on: {
-            click: function($event) {
-              return _vm.$emit("togglefav", _vm.id)
-            }
-          }
-        }),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "dropdown-menu navbar-dropdown",
+            attrs: { "aria-labelledby": "options" }
+          },
+          [
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-primary",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("togglefav", _vm.id)
+                  }
+                }
+              },
+              [
+                _c("i", { class: ["mdi", _vm.isfavorite, "mr-2", "mdi-18px"] }),
+                _vm._v("Favorito\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-divider" }),
+            _vm._v(" "),
+            _c("h6", { staticClass: "px-3 py-1 mb-0" }, [_vm._v("Tema")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown-divider" }),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-danger",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("toggletheme", _vm.id, "danger")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-brightness-1 mdi-18px mr-2" }),
+                _vm._v("Sunset\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-info",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("toggletheme", _vm.id, "info")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-brightness-1 mdi-18px mr-2" }),
+                _vm._v("Blue sky\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-success",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("toggletheme", _vm.id, "success")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-brightness-1 mdi-18px mr-2" }),
+                _vm._v("Green garden\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-warning",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("toggletheme", _vm.id, "warning")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-brightness-1 mdi-18px mr-2" }),
+                _vm._v("Yellow\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-dark",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("toggletheme", _vm.id, "dark")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-brightness-1 mdi-18px mr-2" }),
+                _vm._v("Dark\n            ")
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "dropdown-item text-primary",
+                on: {
+                  click: function($event) {
+                    return _vm.$emit("toggletheme", _vm.id, "primary")
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "mdi mdi-brightness-1 mdi-18px mr-2" }),
+                _vm._v("Purple\n            ")
+              ]
+            )
+          ]
+        ),
         _vm._v(" "),
         _c("h6", { staticClass: "card-text" }, [
           _vm._v(_vm._s(_vm.description))
@@ -39310,7 +39483,26 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "float-right card-icon",
+        attrs: {
+          id: "options",
+          href: "#",
+          "data-toggle": "dropdown",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "mdi mdi-dots-horizontal text-white mdi-36px" })]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -39832,9 +40024,13 @@ var render = function() {
                         title: collection.name,
                         description: collection.description,
                         id: collection.id,
-                        favorite: collection.favorite
+                        favorite: collection.favorite,
+                        theme: collection.theme.name
                       },
-                      on: { togglefav: _vm.togglefav }
+                      on: {
+                        togglefav: _vm.togglefav,
+                        toggletheme: _vm.toggletheme
+                      }
                     })
                   ],
                   1
@@ -39922,9 +40118,13 @@ var render = function() {
                       title: collection.name,
                       description: collection.description,
                       id: collection.id,
-                      favorite: collection.favorite
+                      favorite: collection.favorite,
+                      theme: collection.theme.name
                     },
-                    on: { togglefav: _vm.togglefav }
+                    on: {
+                      togglefav: _vm.togglefav,
+                      toggletheme: _vm.toggletheme
+                    }
                   })
                 ],
                 1
@@ -40271,7 +40471,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("input", {
               staticClass: "form-control bg-transparent border-0",
-              attrs: { type: "text", placeholder: "Search projects" }
+              attrs: { type: "text", placeholder: "Not working" }
             })
           ])
         ]

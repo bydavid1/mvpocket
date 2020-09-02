@@ -22,8 +22,8 @@
             </router-link>
             <div class="row">
                 <div class="col-md-6 stretch-card grid-margin" v-for="collection in collections" :key="collection.id">
-                    <Card :title="collection.name" :description="collection.description" :id="collection.id" :favorite="collection.favorite" 
-                    v-on:togglefav="togglefav" class="mb-4"/>
+                    <Card :title="collection.name" :description="collection.description" :id="collection.id" :favorite="collection.favorite"
+                    :theme="collection.theme.name" v-on:togglefav="togglefav" v-on:toggletheme="toggletheme" class="mb-4"/>
                 </div>
             </div>
         </div>
@@ -56,12 +56,20 @@ export default {
             .catch(error => console.log(error.response.data));
         },
         togglefav (id) {
-            axios.put('/api/auth/collection/' + id + '/togglefav', {'id' : this.id})
+            axios.put('/api/auth/collection/' + id + '/togglefav')
             .then(() => {
                 this.getCollections()
             })
             .catch(err => console.log(err))
+        },
+        toggletheme (id, theme) {
+            axios.put('/api/auth/collection/' + id + '/toggletheme', {'theme' : theme})
+            .then(() => {
+                this.getCollections()
+            })
+            .catch(err => console.log(err.response.data))
         }
+
     }
 }
 </script>
