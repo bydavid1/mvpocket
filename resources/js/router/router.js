@@ -4,6 +4,7 @@ import VueRouter from "vue-router"; // We import /Vue router from /vue-router fi
 Vue.use(VueRouter)
 
 import Collection from "../pages/Collections";
+import FavCollections from "../pages/FavoriteCollections";
 import AddCollection from "../pages/AddCollection";
 import SitesCollection from "../pages/SitesCollection";
 import AddSite from "../pages/AddSite";
@@ -42,6 +43,11 @@ const router = new VueRouter({
                 path:"/",
                 name: "collections",
                 component: Collection,
+            },
+            {
+                path:"/collections/favorites",
+                name: "favCollections",
+                component: FavCollections,
             },
             {
                 path:"/collections/add",

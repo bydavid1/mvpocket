@@ -31,6 +31,25 @@ class CollectionController extends Controller
     }
 
     /**
+     * toggle favorite.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getFavorites()
+    {
+        try {
+            $user = auth()->user();
+            if ($user != null) {
+                $data = Collection::orderBy('id', 'desc')->where('users_id', $user->id)->where('favorite', 1)->get();
+                return response()->json($data);
+            }
+        } catch (Exception $e) {
+            return response(["Error" => $e->getMessage()], 500);
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -56,6 +75,34 @@ class CollectionController extends Controller
             $collection->save();
      
             return response()->json('The collection successfully added', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * toggle favorite.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function favorite($id)
+    {
+        try {
+            $user = auth()->user();
+            
+            if ($user == null) {
+                return response()->json(["message" => "user not found"], 404);
+            }
+
+            $collection = Collection::findOrFail($id);
+            $collection->favorite = ($collection->favorite == 0) ? 1 : 0;
+            if ($collection->save()) {
+                return response()->json('Favorite toggled', 200);
+            }else{
+                return response()->json('Favorite not toggled', 500);
+            }
+
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 500);
         }

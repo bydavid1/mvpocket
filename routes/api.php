@@ -41,7 +41,9 @@ Route::prefix('auth')->group(function () {
         // CRUD Routes
 
         Route::get('collection' , 'CollectionController@index');
+        Route::get('collection/favorites' , 'CollectionController@getFavorites');
         Route::post('collection/store' , 'CollectionController@store');
+        Route::put('collection/{id}/togglefav' , 'CollectionController@favorite');
         Route::get('collection/edit/{id}' , 'CollectionController@edit');
         Route::put('collection/update/{id}' , 'CollectionController@update');
         Route::delete('collection/delete/{id}' , 'CollectionController@destroy');

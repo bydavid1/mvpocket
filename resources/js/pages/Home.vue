@@ -3,7 +3,7 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a  href="index.html"><img src="images/logo.png" alt="logo" /></a>
+                <a  href="#"><img src="images/logo.png" alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo.png"
                         alt="logo" /></a>
             </div>
@@ -77,15 +77,30 @@
                     </li>
                     <li class="nav-item">
                         <router-link to="/home" class="nav-link">
-                            <span class="menu-title">Favoritos</span>
-                            <i class="mdi mdi-star menu-icon"></i>
-                        </router-link>
-                    </li>
-                    <li class="nav-item">
-                        <router-link to="/home" class="nav-link">
                             <span class="menu-title">Collecciones</span>
                             <i class="mdi mdi-buffer menu-icon"></i>
                         </router-link>
+                    </li>
+                    <li class="nav-item sidebar-actions">
+                        <span class="nav-link">
+                            <div class="mt-4">
+                                <div class="border-bottom">
+                                    <p class="text-secondary">Favoritos<i class="mdi mdi-star menu-icon float-right"></i></p>
+                                </div>
+                                <ul class="gradient-bullet-list mt-4">
+                                    <li>
+                                        <router-link to="/collections/favorites">
+                                            <span class="menu-title">Collecciones</span>
+                                        </router-link>
+                                    </li>
+                                    <li>
+                                        <router-link to="/home">
+                                            <span class="menu-title">Sitios</span>
+                                        </router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </span>
                     </li>
                     <li class="nav-item sidebar-actions">
                         <span class="nav-link">
@@ -93,15 +108,6 @@
                                 <h6 class="text-secondary mb-3">Acciones</h6>
                             </div>
                             <button class="btn btn-block btn-lg btn-gradient-dark btn-rounded mt-4">+ Add site</button>
-                            <div class="mt-4">
-                                <div class="border-bottom">
-                                    <p class="text-secondary">Categories</p>
-                                </div>
-                                <ul class="gradient-bullet-list mt-4">
-                                    <li>Free</li>
-                                    <li>Pro</li>
-                                </ul>
-                            </div>
                         </span>
                     </li>
                     <li class="nav-item sidebar-actions">
