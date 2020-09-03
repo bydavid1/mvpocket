@@ -13,7 +13,8 @@
             </div>
         </div>
         <div v-if="collections.length < 1" class="container">
-            <h1>Aun no hay favoritos guardados</h1>
+            <Empty message="Aún no hay favoritos guardados" submessage="¡Ve a tus colecciones y marca uno como favorito!" btnmessage="Ver colecciones" 
+            route="/home"/>
         </div>
         <div class="container" v-else>
             <div class="row">
@@ -28,6 +29,7 @@
 
 <script>
 import Card from "../components/Card"
+import Empty from "../components/EmptyIllustration"
 export default {
     name: "FavoriteCollections",
     data () {
@@ -39,7 +41,8 @@ export default {
         this.getCollections()
     },
     components:{
-        Card
+        Card,
+        Empty
     },
 
     methods : {

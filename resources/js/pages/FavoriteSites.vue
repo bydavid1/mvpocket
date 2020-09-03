@@ -10,8 +10,9 @@
                 </ol>
             </nav>
         </div>
-        <div v-if="sites.length == 0">
-            <h1>Aun no hay favoritos guardados</h1>
+        <div v-if="sites.length < 1">
+            <Empty message="Aún no hay favoritos guardados" submessage="¡Revisa tus sitios y marca uno como favorito!" btnmessage="Ir a colecciones" 
+                route="/home"/>
         </div>
         <div v-else class="row">
             <div class="col-md-4 mb-4" v-for="site in sites" :key="site.id">
@@ -24,6 +25,7 @@
 
 <script>
 import CardImage from "../components/CardImage"
+import Empty from "../components/EmptyIllustration"
 export default {
     name: "FavoriteSites",
     data () {
@@ -51,7 +53,8 @@ export default {
         },
     },
     components:{
-        CardImage
+        CardImage,
+        Empty
     },
 }
 </script>

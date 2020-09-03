@@ -53,9 +53,9 @@
                         </a>
                     </li>
                     <li class="nav-item nav-settings d-none d-lg-block">
-                        <a class="nav-link" href="#">
+                        <router-link class="nav-link" to="/collections/add">
                             <i class="mdi mdi-plus-box-multiple"></i>
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
                 <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"

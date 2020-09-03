@@ -10,12 +10,8 @@
                 </ol>
             </nav>
         </div>
-        <div v-if="sites.length == 0">
-            <h1>Aun no hay sitios guaradados</h1>
-            <router-link :to="savepath" class="btn btn-gradient-info btn-rounded mb-5 mt-5 btn-block">
-                <i class="mdi mdi-plus-box-multiple mr-1"></i>
-                Agregar sitio
-            </router-link>
+        <div v-if="sites.length < 1">
+            <Empty message="Aún no hay sitios" submessage="¡Busca un nuevo sitio!" btnmessage="Guardar sitio" :route="savepath"/>
         </div>
         <div v-else> 
             <router-link :to="savepath" class="btn btn-gradient-info btn-rounded mb-5 btn-block">
@@ -35,6 +31,7 @@
 
 <script>
 import CardImage from "../components/CardImage"
+import Empty from "../components/EmptyIllustration"
 export default {
     name: "SitesCollection",
     data () {
@@ -70,7 +67,8 @@ export default {
         },
     },
     components:{
-        CardImage
+        CardImage,
+        Empty
     },
 }
 </script>

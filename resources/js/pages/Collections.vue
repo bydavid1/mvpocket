@@ -11,9 +11,8 @@
                 </nav>
             </div>
         </div>
-        <div v-if="collections == null">
-            <h1>Aun no hay colecciones guardadas</h1>
-            <router-link to="/collections/add" class="btn btn-gradient-success mb-3">Crear coleccion</router-link>
+        <div class="container" v-if="collections < 1">
+            <Empty message="Aún no hay colleciones" submessage="¡Crea una!" btnmessage="Crear colección" route="/collections/add"/>
         </div>
         <div class="container" v-else>
             <router-link to="/collections/add" class="btn btn-gradient-success btn-rounded mb-5 btn-block">
@@ -32,6 +31,7 @@
 
 <script>
 import Card from "../components/Card"
+import Empty from "../components/EmptyIllustration"
 export default {
     name: "Collections",
     data () {
@@ -43,7 +43,8 @@ export default {
         this.getCollections()
     },
     components:{
-        Card
+        Card,
+        Empty
     },
 
     methods : {
