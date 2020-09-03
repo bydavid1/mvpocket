@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="container">
-            <div class="page-header">
-                <h3 class="page-title"> Colecciones </h3>
+            <div class="page-header mb-5">
+                <h3> Colecciones </h3>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>

@@ -32,6 +32,24 @@ class SiteController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function explore()
+    {
+        try {
+            $user = auth()->user();
+            if ($user != null) {
+                $data = Site::orderBy('id', 'desc')->where('public', '1')->get();
+                return response()->json($data);
+            }
+        } catch (Exception $e) {
+            return response(["Error" => $e->getMessage()], 500);
+        }
+    }
+
+    /**
      * get favorite.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -117,6 +135,34 @@ class SiteController extends Controller
                 return response()->json('Favorite toggled', 200);
             }else{
                 return response()->json('Favorite not toggled', 500);
+            }
+
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * toggle favorite.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function public($id)
+    {
+        try {
+            $user = auth()->user();
+            
+            if ($user == null) {
+                return response()->json(["message" => "user not found"], 404);
+            }
+
+            $site = Site::findOrFail($id);
+            $site->public = ($site->public == 0) ? 1 : 0;
+            if ($site->save()) {
+                return response()->json('Privacy toggled', 200);
+            }else{
+                return response()->json('Privacy not toggled', 500);
             }
 
         } catch (Exception $e) {

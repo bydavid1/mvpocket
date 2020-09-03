@@ -75,6 +75,12 @@
                             <i class="mdi mdi-home menu-icon"></i>
                         </router-link>
                     </li>
+                    <li class="nav-item">
+                        <router-link to="/explore" class="nav-link">
+                            <span class="menu-title">Explorar</span>
+                            <i class="mdi mdi-apple-safari menu-icon"></i>
+                        </router-link>
+                    </li>
                     <li class="nav-item sidebar-actions">
                         <span class="nav-link">
                             <div class="mt-4">
@@ -134,11 +140,9 @@
                 <!-- partial:partials/_footer.html -->
                 <footer class="footer">
                     <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a
-                                href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a>. All rights
-                            reserved.</span>
-                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
-                            with <i class="mdi mdi-heart text-danger"></i></span>
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Template made by <a
+                                href="https://www.bootstrapdash.com/" target="_blank">BootstrapDash</a></span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Site made by Byron Jimenez </span>
                     </div>
                 </footer>
                 <!-- partial -->

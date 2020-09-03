@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="page-header">
-            <h3 class="page-title">Guardados </h3>
+        <div class="page-header mb-5">
+            <h3>Guardados </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -16,7 +16,7 @@
         <div v-else class="row">
             <div class="col-md-4 mb-4" v-for="site in sites" :key="site.id">
                 <CardImage :title="site.title" :description="site.description" :url="site.url"
-                 :image="site.image" :favorite="site.favorite" :id="site.id" v-on:togglefav="togglefav"/>
+                 :image="site.image" :favorite="site.favorite" :privacy="site.public" :id="site.id" v-on:togglefav="togglefav"/>
             </div>
         </div>
     </div>
