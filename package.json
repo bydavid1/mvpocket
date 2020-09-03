@@ -30,6 +30,7 @@
         "bootswatch": "^4.5.2",
         "psl": "^1.8.0",
         "vue-axios": "^2.1.5",
+        "vue-progressbar": "^0.7.5",
         "vue-router": "^3.4.3",
         "vuex": "^3.5.1"
     }

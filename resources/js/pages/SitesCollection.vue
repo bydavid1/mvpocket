@@ -40,6 +40,9 @@ export default {
             savepath: '/collections/'+ this.$route.params.id +'/site/add'
         }
     },
+    beforeCreate () {
+        this.$Progress.start()
+    },
     created () {
         this.getSites()
     },
@@ -49,7 +52,11 @@ export default {
             .get('/api/auth/collection/id/sites'.replace('id', this.$route.params.id))
             .then(response => {
                 this.sites = response.data;
-            });
+                this.$Progress.finish()
+            })
+            .catch(error => {
+                this.$Progress.fail()
+            })
         },
         togglefav (id) {
             axios.put('/api/auth/sites/' + id + '/togglefav', {'id' : this.id})
