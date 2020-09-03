@@ -7,6 +7,7 @@ import Collection from "../pages/Collections";
 import FavCollections from "../pages/FavoriteCollections";
 import AddCollection from "../pages/AddCollection";
 import SitesCollection from "../pages/SitesCollection";
+import FavoriteSites from "../pages/FavoriteSites";
 import AddSite from "../pages/AddSite";
 import Welcome from "../pages/Welcome";
 import Home from "../pages/Home";
@@ -58,6 +59,11 @@ const router = new VueRouter({
                 path:"/collections/:id/sites",
                 name: "sitescollection",
                 component: SitesCollection,
+            },
+            {
+                path:"/sites/favorites",
+                name: "favoritesites",
+                component: FavoriteSites,
             },
             {
                 path:"/collections/:id/site/add",

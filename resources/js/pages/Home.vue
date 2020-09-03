@@ -75,12 +75,6 @@
                             <i class="mdi mdi-home menu-icon"></i>
                         </router-link>
                     </li>
-                    <li class="nav-item">
-                        <router-link to="/home" class="nav-link">
-                            <span class="menu-title">Collecciones</span>
-                            <i class="mdi mdi-buffer menu-icon"></i>
-                        </router-link>
-                    </li>
                     <li class="nav-item sidebar-actions">
                         <span class="nav-link">
                             <div class="mt-4">
@@ -94,7 +88,7 @@
                                         </router-link>
                                     </li>
                                     <li>
-                                        <router-link to="/home">
+                                        <router-link to="/sites/favorites">
                                             <span class="menu-title">Sitios</span>
                                         </router-link>
                                     </li>
@@ -124,10 +118,10 @@
                         </router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/home" class="nav-link">
+                        <a href="https://github.com/bydavid1/mvpocket" target="_blank" class="nav-link">
                             <span class="menu-title">Codigo</span>
                             <i class="mdi menu-icon mdi-github"></i>
-                        </router-link>
+                        </a>
                     </li>
                 </ul>
             </nav>

@@ -32,6 +32,25 @@ class SiteController extends Controller
     }
 
     /**
+     * get favorite.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getFavorites()
+    {
+        try {
+            $user = auth()->user();
+            if ($user != null) {
+                $data = Site::orderBy('id', 'desc')->where('user_id', $user->id)->where('favorite', 1)->get();
+                return response()->json($data);
+            }
+        } catch (Exception $e) {
+            return response(["Error" => $e->getMessage()], 500);
+        }
+    }
+
+    /**
      * Show tog:data
      *
      * @return \Illuminate\Http\Response
@@ -57,12 +76,14 @@ class SiteController extends Controller
     public function store(Request $request, $id)
     {
         try {
-            if (auth()->user() == null) {
+            $user = auth()->user();
+            if ($user == null) {
                 return response()->json(["message" => "user not found"], 404);
             }
             
             $site = new Site();
             $site->collection_id = $id;
+            $site->user_id = $user->id;
             $site->url = $request['url'];
             $site->image = $request['image'];
             $site->title = $request['title'];
@@ -70,6 +91,34 @@ class SiteController extends Controller
             $site->save();
 
             return response()->json('The site successfully added', 200);
+        } catch (Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * toggle favorite.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function favorite($id)
+    {
+        try {
+            $user = auth()->user();
+            
+            if ($user == null) {
+                return response()->json(["message" => "user not found"], 404);
+            }
+
+            $site = Site::findOrFail($id);
+            $site->favorite = ($site->favorite == 0) ? 1 : 0;
+            if ($site->save()) {
+                return response()->json('Favorite toggled', 200);
+            }else{
+                return response()->json('Favorite not toggled', 500);
+            }
+
         } catch (Exception $e) {
             return response()->json(["message" => $e->getMessage()], 500);
         }

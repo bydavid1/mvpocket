@@ -18,10 +18,14 @@ class CreateSitesTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('collection_id');
             $table->foreign('collection_id')->references('id')->on('collections')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('url');
             $table->string('image');
             $table->string('title');
             $table->string('description');
+            $table->boolean('favorite')->default(false);
+            $table->boolean('public')->default(false);
         });
     }
 

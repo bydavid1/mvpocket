@@ -6,8 +6,8 @@
                     <router-link to="/home">Home</router-link>
                 </div>
                 <div v-else>
-                    <router-link to="/login">Login</router-link>
-                    <router-link to="/register">Register</router-link>
+                    <router-link to="/login">Iniciar sesion</router-link>
+                    <router-link to="/register">Registrarse</router-link>
                 </div>
             </div>
             <div class="content">
@@ -18,7 +18,7 @@
                     Don't forget your sites
                 </div>
                 <div class="m-b-lg">
-                    <router-link to="/login" class="btn-sign">Goto login</router-link>
+                    <router-link to="/login" class="btn-sign">Entrar</router-link>
                 </div>
                 <img class="tech-logo" src="images/tech.png">
             </div>

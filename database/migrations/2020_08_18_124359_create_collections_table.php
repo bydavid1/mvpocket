@@ -18,9 +18,13 @@ class CreateCollectionsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('theme_id')->default('1');
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
             $table->string('name');
             $table->string('description');
             $table->string('image')->nullable();
+            $table->boolean('favorite')->default(false);
+            $table->boolean('public')->default(false);
         });
     }
 

@@ -50,6 +50,8 @@ Route::prefix('auth')->group(function () {
         Route::delete('collection/delete/{id}' , 'CollectionController@destroy');
 
         Route::get('collection/{id}/sites' , 'SiteController@index');
+        Route::get('collection/sites/favorites' , 'SiteController@getFavorites');
+        Route::put('sites/{id}/togglefav' , 'SiteController@favorite');
         Route::get('fetchOpenGraph' , 'SiteController@getOpenGraph');
         Route::post('collection/{id}/site/store' , 'SiteController@store');
         Route::put('collection/site/update/{id}', 'SiteController@update');
